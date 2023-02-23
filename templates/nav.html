@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #nav{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #21eb32;
+            padding: 5px;
+            display: flex;
+           
+        }
+        #logo {
+            height: 50px;
+        }
+
+        button{
+            position: fixed;
+        }
+        
+    </style>
+</head>
+<body>
+    {% if session['name'] == None %}
+    <div id="nav">
+        <div id="logo"><img src="" alt="logo"></div>
+        <div id="btn_login">
+            <a href="{{url_for('login')}}"><input type="button" value="    Log in    " class="button1"></a>
+        </div>
+        <div id="btn_signin">
+            <a href="{{url_for('signup')}}"><input type="button" value="    Sign in    " class="button1"></a>
+        </div>
+    </div>
+    {% endif %}
+    
+</body>
+</html>

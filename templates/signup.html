@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Signup</title>
+{% endblock %}
+
+{% block body %}
+<div id="back_link">
+    <a href="/"><input type="button" value="<BACK"></a>
+</div>
+<div class="form">
+    <form method="post">
+        <input id="first_name" type="text" name="first_name" placeholder="First Name">
+        <input id="last_name" type="text" name="last_name" placeholder="Last Name">
+        <input id="gender" type="text" name="gender" placeholder="gender">
+        <input id="email" type="email" name="email_address" placeholder="Email Address" required>
+        <input id="phone" type="tel" name="phone" placeholder="Mobile Number">
+        <input id="password" type="password" name="password" placeholder="Password">
+        {{msg}}
+        <input id="otp" type="number" name="otp" placeholder="Enter 6-digit OTP" maxlength="6" size="6" >
+        <input type="submit" value="Submit">
+
+    </form>
+    <button onclick="generate_otp_email()">Verify Email</button>
+    
+</div>
+
+
+
+<script>
+    function generate_otp_email(){
+        var email = $('#email').val();
+        $.ajax({
+                url: '/generate_otp_email',
+                data: {data:email},
+                type: 'POST',
+                success:function(response){
+                    var generated_otp = response.otp
+                },
+                error: function(error){
+			 	    console.log(error);
+                    alert("The entered Email is Incorrect");
+			    }
+            });
+    }
+</script>
+
+
+
+{% endblock %}
+

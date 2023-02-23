@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Home</title>
+    <style>
+        .content {
+            width: 100%;
+            background-color:white; 
+            padding-top: 4%;
+            padding-bottom: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% include 'nav.html' %} 
+    <div class="content">
+        <h1>Home</h1>
+    </div>
+{% endblock %}
