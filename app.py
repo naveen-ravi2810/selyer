@@ -49,7 +49,21 @@ def home():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
-    return render_template('login.html')
+    msg = ""
+    if request.method == 'POST':
+        details = request.form
+        name = details['username']
+        password = details['password']
+        user = users_column.find_one({"$or":[{'Email':name,'Password':password},{'Phone':name,'Password':password}]})
+        if user:
+            session['name'] = user['First_Name']
+            session['role'] = user['Role']
+            session['email'] = user['Email']
+            session['phone'] = user['Phone']
+            return redirect('/dashboard')
+        else:
+            msg = "wrong Username/Password"
+    return render_template('login.html',msg=msg)
 
 @app.route('/signup',methods=['GET','POST'])
 def signup():
@@ -82,6 +96,9 @@ def generate_otp_email():
             otp_status = email_otp
     return jsonify ({'success':True,'otp':otp_status})
 
+@app.route("/dashboard",methods=['GET','POST'])
+def dashboard():
+    return render_template('dashboard.html')
 
 if __name__=='__main__':
     app.run(debug=True)

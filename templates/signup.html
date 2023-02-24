@@ -36,6 +36,9 @@
                 type: 'POST',
                 success:function(response){
                     var generated_otp = response.otp
+                    if (generated_otp === 1) {
+                   alert("Wrong Email");
+            }
                 },
                 error: function(error){
 			 	    console.log(error);
